@@ -1,18 +1,21 @@
+require 'pg'
+
 class Player
   
-  attr_accessor :name, :number, :team
+  attr_accessor :name, :number, :team, :id
   
   def initialize(attributes)
     @name = attributes[:name]
     @number = attributes[:number].to_i
     @team = attributes[:team]
+    @id = attributes[:id].to_i
   end
   
   def self.all
     @players = []
     results = DB.exec("SELECT * FROM players;")
     results.each do |result|
-      @players << Player.new({name: result['name'], number: result['number'], team: result['team']})
+      @players << Player.new({id: result['id'], name: result['name'], number: result['number'], team: result['team']})
     end
     @players
   end
