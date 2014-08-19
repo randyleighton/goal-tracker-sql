@@ -23,5 +23,10 @@ describe Game do
     expect(game1).to eq game2
   end
   
+  it 'finds a game' do
+    game1 = Game.new({:game_date => '2014-08-06'})
+    game1.save
+    expect(Game.find(game1.id)).to eq game1
+  end  
   
 end

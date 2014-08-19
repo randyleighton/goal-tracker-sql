@@ -84,18 +84,22 @@ end
 
 def add_goal
   system("clear")
-  view_player
+  view_players
   puts "choose a player id (#) to add a goal:"  
-  player_inp = gets.chomp
+  player_inp = gets.chomp.to-i
   view_games
   puts "\n\nChoose the (#) of the game the player scored in: "
-  game_inp = gets.chomp
+  game_inp = gets.chomp.to_i
+  current_player = Player.find(player_inp)
+  current_game = Game.find(game_inp)
   
   
-  
+  puts "Players goal added to the record."  
+  puts ""
 end
 
 def view_goals
+
 end
 
 

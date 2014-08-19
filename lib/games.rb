@@ -23,6 +23,11 @@ class Game
     @id = result.first['id'].to_i
   end
 
+  def self.find(search_id)
+    result = DB.exec("SELECT * FROM games WHERE id = #{search_id};")[0]
+    Game.new({id: result['id'].to_i, game_date: result['game_date']})
+  end
+  
   def ==(another_game)
     self.game_date == another_game.game_date
   end
