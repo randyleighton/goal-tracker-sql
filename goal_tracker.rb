@@ -16,9 +16,10 @@ def  main_menu
     puts "(2) Add a player to the database"
     puts "    You must create players and Games to add or view goals"
     puts "(3) Add a goal to a player"
-    puts "(4) View goals in the database"  
+    puts "(4) View goals by Player (already added to player)"  
     puts "(5) View Game Dates"
     puts "(6) View Players"
+
     puts "(x) EXIT\n\n"
     choice = gets.chomp
     case choice
@@ -86,20 +87,27 @@ def add_goal
   system("clear")
   view_players
   puts "choose a player id (#) to add a goal:"  
-  player_inp = gets.chomp.to-i
+  player_inp = gets.chomp.to_i
   view_games
   puts "\n\nChoose the (#) of the game the player scored in: "
   game_inp = gets.chomp.to_i
   current_player = Player.find(player_inp)
   current_game = Game.find(game_inp)
-  
-  
+  current_player.add_goal(current_game.id)
   puts "Players goal added to the record."  
   puts ""
 end
 
 def view_goals
-
+  system("clear")
+  view_players
+  puts "choose a player id (#) to view their games with goals: "  
+  player_inp = gets.chomp.to_i
+  current_player = Player.find(player_inp)
+  current_player.get_goals.each do |goals|
+    puts "Game Date Goal scored: #{goals.game_date}"
+  end
+  puts "\n\n"
 end
 
 

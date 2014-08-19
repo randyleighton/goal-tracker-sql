@@ -25,7 +25,7 @@ class Player
     result = DB.exec("SELECT * FROM players WHERE id = #{search_id};")[0]
     Player.new({id: result['id'].to_i, name: result['name'], number: result['number'].to_i, team: result['team']})
   end
-  
+ 
   def save
     result = DB.exec("INSERT INTO players (name, number, team) VALUES ('#{@name}','#{@number}','#{@team}') RETURNING id;")
     @id = result.first['id'].to_i
