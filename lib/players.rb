@@ -15,13 +15,19 @@ class Player
     @players = []
     results = DB.exec("SELECT * FROM players;")
     results.each do |result|
-      @players << Player.new({id: result['id'], name: result['name'], number: result['number'], team: result['team']})
+      @players << Player.new({id: result['id'].to_i, name: result['name'], number: result['number'], team: result['team']})
     end
     @players
   end
   
+  def self.find(search_id)
+    result = DB.exec("SELECT * FROM players WHERE id = #{search_id};")[0]
+    Player.new({id: result['id'].to_i, name: result['name'], number: result['number'].to_i, team: result['team']})
+  end
+  
   def save
-    DB.exec("INSERT INTO players (name, number, team) VALUES ('#{@name}','#{@number}','#{@team}');")
+    result = DB.exec("INSERT INTO players (name, number, team) VALUES ('#{@name}','#{@number}','#{@team}') RETURNING id;")
+    @id = result.first['id'].to_i
   end
   
   def ==(another_player)

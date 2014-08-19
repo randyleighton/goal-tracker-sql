@@ -18,6 +18,7 @@ describe Player do
     player.save
     expect(Player.all).to eq [player]
   end   
+  
   it 'makes similar objects the same' do
     player1 = Player.new({name: 'Gerard', number: 8, team: 'Liverpool'})
     player2 = Player.new({name: 'Gerard', number: 8, team: 'Liverpool'})
@@ -25,5 +26,15 @@ describe Player do
     player2.save
     expect(player1).to eq player2
   end
+  
+  it 'find a player' do
+    player1 = Player.new({id: 1, name: 'Gerard', number: 8, team: 'Liverpool'})
+    player1.save
+    expect(Player.find(player1.id)).to eq player1
+  end  
+  
+  
+  
+  
 
 end

@@ -15,7 +15,7 @@ def  main_menu
     puts "(1) Add a game to the database"
     puts "(2) Add a player to the database"
     puts "    You must create players and Games to add or view goals"
-    puts "(3) Add a goal"
+    puts "(3) Add a goal to a player"
     puts "(4) View goals in the database"  
     puts "(5) View Game Dates"
     puts "(6) View Players"
@@ -83,6 +83,16 @@ def view_games
 end
 
 def add_goal
+  system("clear")
+  view_player
+  puts "choose a player id (#) to add a goal:"  
+  player_inp = gets.chomp
+  view_games
+  puts "\n\nChoose the (#) of the game the player scored in: "
+  game_inp = gets.chomp
+  
+  
+  
 end
 
 def view_goals
